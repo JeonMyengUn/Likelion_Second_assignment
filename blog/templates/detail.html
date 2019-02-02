@@ -5,6 +5,9 @@
     <title>:: Detail Page ::</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   </head>
+  {%extends 'base.html'%}
+
+  {%block contents%}
   <body>
     <div class="container page-header">
       <h1>:: 자세한 내용을 알려주는 페이지 ::</h1>
@@ -22,4 +25,5 @@
     <a href="{% url 'destroy' blog_detail.id %}" type="button" class="btn btn-warning">삭제</a>
     </div>
   </body>
+  {%endblock%}
 </html>
