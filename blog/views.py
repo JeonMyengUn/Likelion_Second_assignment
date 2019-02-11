@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.core.paginator import Paginator
+from faker import Faker
 from .models import Blog
 
 def index(request):
     blogs = Blog.objects
-    return render(request, 'index.html',{'blogs': blogs})
+    blog_list = Blog.objects.all()
+    paginator = Paginator(blog_list, 3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'index.html', {'blogs': blogs, 'posts': posts})
 
 def detail(request, blog_id):
     blogs_detail = get_object_or_404(Blog, pk=blog_id)

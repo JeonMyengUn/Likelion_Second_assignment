@@ -9,12 +9,12 @@
   {%extends 'base.html'%}
 
   {%block contents%}
-  <body style="background-image: url('https://images.pexels.com/photos/207301/pexels-photo-207301.jpeg?cs=srgb&dl=hd-wallpaper-ivy-leaves-207301.jpg&fm=jpg');">
+  <body>
     <div class="container page-header">
         <h1 class="page-header">:: Index Page ::</h1>
     </div>
     <hr>
-      {%for blog in blogs.all%}
+      {% for blog in posts %}
         <div class="container">
           <div class="card">
               <div class="card-body">
@@ -27,6 +27,35 @@
         </div>
         <br>
       {%endfor%}
+
+
+      <!-- first previous 1of2 next Last  -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-lg justify-content-center">
+          {% if posts.has_previous%}
+            <li class="page-item">
+              <a class="page-link" href="?page=1">Frist</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+            </li>
+          {%endif%}
+
+          <li class="page-item"><a class="page-link" href="?page={{posts.number}}">{{posts.number}}</a></li>
+          <li class="page-item"><a class="page-link" href="#">of</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">{{ posts.next_page_number }}</a></li>
+
+          {% if posts.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+          </li>
+          <li class="page-item">
+              <a class="page-link" href="?page={{ posts.paginator.num_pages }}">Last &raquo;</a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </nav>
+    {%endblock%}
   </body>
-  {%endblock%}
 </html>
